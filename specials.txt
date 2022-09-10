@@ -1,0 +1,24 @@
+#pending
+redirectlog
+diff_interview_schedule
+
+#questions
+questionslibrary, questionnaires, _questionnaire_questions: schema and data or just data
+pitchvideos, pitchvideometa ?
+reviews_answers ?
+
+#anomalies
+'_needed_diplome_for_a_job':
+	select * from (SELECT _needed_diplome_for_a_job.*,_job_offers.idEntry as job FROM _needed_diplome_for_a_job LEFT JOIN _job_offers ON _job_offers.idEntry=_needed_diplome_for_a_job.idJob ORDER BY `job` ASC) as tt WHERE tt.job is NULL
+
+'_needed_langages_for_a_job': 
+	select * from (SELECT _needed_langages_for_a_job .*,_job_offers.idEntry as job FROM _needed_langages_for_a_job  LEFT JOIN _job_offers ON _job_offers.idEntry=_needed_langages_for_a_job.idJob ORDER BY `job` ASC) as tt WHERE tt.job is NULL
+
+ '_user_interests'
+ 	SELECT *,LENGTH(label) FROM `_user_interests` WHERE LENGTH(label)>255
+
+'userreview'
+ 	SELECT * FROM `userreview` WHERE idUser is null
+
+reviews_answers
+ 	select * from (SELECT reviews_answers.*,userreview.id as userreview,userreview.idUser FROM reviews_answers LEFT JOIN userreview ON reviews_answers.idReview=userreview.id) as tt WHERE tt.idUser is NULL 

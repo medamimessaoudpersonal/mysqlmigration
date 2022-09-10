@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#installing my sql before running the program
+if [[ $1 == "install" ]]
+then
+	sudo apt-get install python-dev python3-dev
+	sudo apt-get install libmysqlclient-dev
+	pip install pymysql
+	pip install mysqlclient
+	exit 0
+fi
+
+if [[ $1 == "config" ]]
+then
+	python3 -m venv database-migration
+	cd database-migration
+	mkdir -p ./dump/dev
+        mkdir -p ./dump/prod
+	exit 0
+fi
+
+if [[ $1 == "full" ]]
+then
+	mysql -u root -p -h localhost -e "DROP DATABASE fabskill;"
+	source ./bin/activate
+	python3 migration.py createDb
+	python3 migration.py createSchema
+	#python3 migration.py dumpProd
+	python3 migration.py importData
+fi
+
+if [[ $1 == "testing" ]]
+then
+	source ./bin/activate
+	mysql -u root -p -h localhost -e "DROP DATABASE fabskill;"
+	mysql -u root -p -h localhost < ./newSchema.sql
+	python3 migration.py importData
+	mysql -u root -p -h localhost fabskill < ./insertData.sql
+fi
+
+#activate env
+source ./bin/activate
+python3 migration.py $1 $2 $3 $4 $5 $6 $7

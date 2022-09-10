@@ -1,0 +1,8 @@
+token eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzYWx0IjoiMTY2MjU0NDQyMkRYNDhRIiwiZXhwIjoxNjcwMzIwNDIyLCJpYXQiOjE2NjI1NDQ0MjIsImlkIjo3MjQwNn0.ZgvBJwsiRXqSQInpqQc3Yt8rHPA67F8punLYqrKaCGs
+bugs
+
+https://dev2.fabskill.com/api/public/Job/d not working 
+
+select * from (SELECT _user_details.*,count(*) as num FROM `_user_details` GROUP by Lower(_user_details.UserEmail) ) as tt WHERE tt.num>1 ORDER BY num DESC
+
+bechir.afifi@gmail.com
